@@ -265,6 +265,7 @@
   hasAudioReceived:(float **)buffer
     withBufferSize:(UInt32)bufferSize
 withNumberOfChannels:(UInt32)numberOfChannels
+fromRawData:(NSData*)rawData
 {
     //
     // Getting audio data as an array of float buffer arrays. What does that mean?
