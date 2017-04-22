@@ -129,7 +129,7 @@ fromRawData:(NSData *)rawData
     float maxFrequency = [fft maxFrequency];
     NSString *noteName = [EZAudioUtilities noteNameStringForFrequency:maxFrequency
                                                         includeOctave:YES];
-
+    
     __weak typeof (self) weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
         weakSelf.maxFrequencyLabel.text = [NSString stringWithFormat:@"Highest Note: %@,\nFrequency: %.2f", noteName, maxFrequency];
