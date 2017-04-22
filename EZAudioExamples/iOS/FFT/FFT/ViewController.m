@@ -104,6 +104,7 @@ static vDSP_Length const FFTViewControllerFFTWindowSize = 4096;
      hasAudioReceived:(float **)buffer
        withBufferSize:(UInt32)bufferSize
  withNumberOfChannels:(UInt32)numberOfChannels
+fromRawData:(NSData *)rawData
 {
     //
     // Calculate the FFT, will trigger EZAudioFFTDelegate
