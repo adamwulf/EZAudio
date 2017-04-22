@@ -95,7 +95,8 @@
 - (void)    microphone:(EZMicrophone *)microphone
       hasAudioReceived:(float **)buffer
         withBufferSize:(UInt32)bufferSize
-  withNumberOfChannels:(UInt32)numberOfChannels;
+  withNumberOfChannels:(UInt32)numberOfChannels
+           fromRawData:(NSData*)rawData;
 
 //------------------------------------------------------------------------------
 

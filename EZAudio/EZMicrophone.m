@@ -647,8 +647,9 @@ static OSStatus EZAudioMicrophoneCallback(void                       *inRefCon,
     //
     // Notify delegate of new float data processed
     //
-    if ([microphone.delegate respondsToSelector:@selector(microphone:hasAudioReceived:withBufferSize:withNumberOfChannels:)])
+    if ([microphone.delegate respondsToSelector:@selector(microphone:hasAudioReceived:withBufferSize:withNumberOfChannels:fromRawData:)])
     {
+        NSData *rawData = [[NSData alloc] initWithBytes:info->audioBufferList->mBuffers[0].mData length:info->audioBufferList->mBuffers[0].mDataByteSize];
         //
         // Convert to float
         //
@@ -658,7 +659,8 @@ static OSStatus EZAudioMicrophoneCallback(void                       *inRefCon,
         [microphone.delegate microphone:microphone
                        hasAudioReceived:info->floatData
                          withBufferSize:inNumberFrames
-                   withNumberOfChannels:info->streamFormat.mChannelsPerFrame];
+                   withNumberOfChannels:info->streamFormat.mChannelsPerFrame
+                            fromRawData:rawData];
     }
     
     return result;
