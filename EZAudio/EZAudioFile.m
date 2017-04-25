@@ -75,6 +75,10 @@ typedef struct
     pthread_mutex_destroy(&_lock);
     [EZAudioUtilities freeFloatBuffers:self.floatData numberOfChannels:self.clientFormat.mChannelsPerFrame];
     [EZAudioUtilities checkResult:ExtAudioFileDispose(self.info->extAudioFileRef) operation:"Failed to dispose of ext audio file"];
+    
+    if(self.info->sourceURL){
+        CFRelease(self.info->sourceURL);
+    }
     free(self.info);
 }
 
@@ -121,7 +125,7 @@ typedef struct
     self = [self init];
     if (self)
     {
-        self.info->sourceURL = (__bridge CFURLRef)(url);
+        self.info->sourceURL = url ? (CFURLRef)CFBridgingRetain(url) : NULL;
         self.info->clientFormat = clientFormat;
         self.delegate = delegate;
         if (![self setup])
