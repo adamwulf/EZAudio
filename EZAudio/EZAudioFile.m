@@ -472,6 +472,17 @@ typedef struct
                     float rms = [EZAudioUtilities RMS:channelData length:bufferSize];
                     data[channel][i] = rms;
                 }
+                
+                // the data** is an array of arrays of root-mean-squared of the data.
+                // when reading from the mic, it's an array of float* data (the channelData).
+                // I can send an array of channelData + bufferSize + numberOfChannels.
+                // the call to ExtAudioFileRead() will auto-convert into the client format,
+                // so i'm not able to get the rawData from here.
+                //
+                // that'll matter if i want to send the raw data to google again. but it
+                // won't matter if i only want to process it locally here. i might be able
+                // to setup a EZAudioFloatConverter to convert to the raw bits again.
+                
             }
         }
         
