@@ -466,12 +466,23 @@ typedef struct
             }
             else
             {
+                float **outData = (float **)malloc( sizeof(float*) * channels );
+
                 for (int channel = 0; channel < channels; channel++)
                 {
                     float *channelData = audioBufferList->mBuffers[channel].mData;
                     float rms = [EZAudioUtilities RMS:channelData length:bufferSize];
                     data[channel][i] = rms;
+                    
+                    outData[channel] = channelData;
                 }
+                
+                if ([self.delegate respondsToSelector:@selector(audioFile:readAudio:withBufferSize:withNumberOfChannels:)])
+                {
+                    [[self delegate] audioFile:self readAudio:outData withBufferSize:bufferSize withNumberOfChannels:channels];
+                }
+                
+                free(outData);
                 
                 // the data** is an array of arrays of root-mean-squared of the data.
                 // when reading from the mic, it's an array of float* data (the channelData).
