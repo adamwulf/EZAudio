@@ -63,6 +63,12 @@ typedef void (^EZAudioWaveformDataCompletionBlock)(float **waveformData, int len
         withBufferSize:(UInt32)bufferSize
   withNumberOfChannels:(UInt32)numberOfChannels;
 
+- (void)     audioFileLoadingWaveform:(EZAudioFile *)audioFile
+             readAudio:(float **)buffer
+        withBufferSize:(UInt32)bufferSize
+  withNumberOfChannels:(UInt32)numberOfChannels
+                           atFrame:(NSInteger)frameStart;
+
 //------------------------------------------------------------------------------
 
 /**

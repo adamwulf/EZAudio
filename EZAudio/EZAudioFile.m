@@ -477,9 +477,9 @@ typedef struct
                     outData[channel] = channelData;
                 }
                 
-                if ([self.delegate respondsToSelector:@selector(audioFile:readAudio:withBufferSize:withNumberOfChannels:)])
+                if ([self.delegate respondsToSelector:@selector(audioFileLoadingWaveform:readAudio:withBufferSize:withNumberOfChannels:atFrame:)])
                 {
-                    [[self delegate] audioFile:self readAudio:outData withBufferSize:bufferSize withNumberOfChannels:channels];
+                    [[self delegate] audioFileLoadingWaveform:self readAudio:outData withBufferSize:bufferSize withNumberOfChannels:channels atFrame:i * framesPerBuffer];
                 }
                 
                 free(outData);
